@@ -30,8 +30,25 @@ object sampledb2 {
       "driver" -> "com.ibm.db2.jcc.DB2Driver",
       "dbtable" -> "SMS.EMPLOYEE"))
 
-    // show the DataFrame contents
+    println("SHOW ALL:")
     employeeDF.show();
+
+    println("PRINT SCHEMA:")
+    employeeDF.printSchema()
+
+    println("SHOW NAME:")
+    employeeDF.select("NAME").show()
+
+    println("SHOW NAME: and ADDRESS:")
+    employeeDF.select(employeeDF("NAME") , employeeDF("ADDRESS") )
+    println("FILTER JOININGDATE:")
+    employeeDF.filter(employeeDF("JOININGDATE")>"1984-04-01")
+
+    println("GROUP bY ADDRESS:")
+    employeeDF.groupBy("ADDRESS","DESIGNATION").count().show()
+
+
+    // show the DataFrame contents
 
   }
 }
